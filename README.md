@@ -4,7 +4,7 @@ Personal VIM Config
 Vim Python Pro Config.
 
 
-![Vim Python Pro Config](https://i.ibb.co/zHw2BZK/Captura-de-pantalla-de-2020-01-10-15-53-14.png)
+![Vim Python Pro Config](https://i.ibb.co/wr1QP4D/Captura-de-pantalla-de-2020-01-10-15-53-14.png)
 
 
 Install
