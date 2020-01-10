@@ -53,7 +53,7 @@ Install
 3) If you use VIM
 
 ```
-   cp ini.vim ~/.vimrc
+   cp ini.vim ~/.config/nvim/
 ```
 
 4) Open vim and execute PlugInstall command
