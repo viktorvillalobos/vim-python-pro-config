@@ -60,6 +60,11 @@ Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'jeetsukumaran/vim-pythonsense'   
 
 
+"-------------------=== Javascript  ===-----------------------------
+Plug 'mattn/emmet-vim'
+Plug 'pangloss/vim-javascript'
+Plug 'alvan/vim-closetag'
+
 call plug#end()
 
 set encoding=utf-8
@@ -256,6 +261,12 @@ let g:black_fast=0
 let g:black_linelength=80
 let g:black_skip_string_normalization = 0
 let g:black_virtualenv='~/.vim/black'
+
+
+""""""""""""""""""""""""""""""
+" => VIM JS
+""""""""""""""""""""""""""""""
+let g:javascript_plugin_jsdoc = 1
 
 """"""""""""""""""""""""""""""
 " => NCM
