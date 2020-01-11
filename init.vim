@@ -98,7 +98,6 @@ set switchbuf=useopen
 set laststatus=2
 nmap <F9> :bprev<CR>
 nmap <F10> :bnext<CR>
-nmap <silent> <leader>q :SyntasticCheck # <CR> :bp <BAR> bd #<CR>
 
 
 "=====================================================
@@ -222,9 +221,11 @@ let g:ale_fixers = {
 
 let g:ale_fix_on_save = 1
 let g:ale_linters_explicit = 1
+nmap <C-A-S-l> :ALEFix<CR>
 
-
-
+""""""""""""""""""""""""""""""
+" => GO TO DEFINITION
+""""""""""""""""""""""""""""""
 :map <leader>gd <C-]>
 
 """"""""""""""""""""""""""""""

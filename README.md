@@ -84,6 +84,19 @@ This plugin is used to show file icons in NerdTree and requires additional steps
     let g:airline_powerline_fonts = 1
 * If you dont want this feature simply remove this plugin from your vimrc and execute :PluginUpdate in vim, for proper removal delete the devicons plugin folder
 
+KeyMaps
+=======
+
+## Leader
+```
+    let mapleader = ','
+```
+
+## Buffers
+```
+    nmap <F9> :bprev<CR>
+    nmap <F10> :bnext<CR>
+```
 
 
 Enjoy!.
