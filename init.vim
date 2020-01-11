@@ -11,7 +11,6 @@ Plug 'tpope/vim-commentary'
 
 Plug 'liuchengxu/vista.vim'
 
-
 Plug 'jiangmiao/auto-pairs'
 
 Plug 'Vimjas/vim-python-pep8-indent'
@@ -32,10 +31,6 @@ Plug 'yuttie/comfortable-motion.vim'      " Smooth scrolling
 
 Plug 'thaerkh/vim-indentguides'           " Visual representation of indents
 
-Plug 'dense-analysis/ale'
-
-Plug 'neomake/neomake'
-
 Plug 'yegappan/mru'
 
 Plug 'ctrlpvim/ctrlp.vim'
@@ -52,6 +47,11 @@ Plug 'ncm2/ncm2-jedi'   "Python language server
 Plug 'ncm2/ncm2-tern',  {'do': 'npm install'} "Js
 Plug 'ncm2/ncm2-cssomni' "Css Language Server
 
+
+"---------------------Linting----------------------------------
+"
+Plug 'dense-analysis/ale'
+Plug 'psf/black'
 
 "-------------------=== Python  ===-----------------------------
 
@@ -189,13 +189,6 @@ let g:DevIconsEnableFolderPatternMatching = 1
 let g:DevIconsEnableFolderExtensionPatternMatching = 0
 
 "=====================================================
-"" Neomake Settings 
-"=====================================================
-call neomake#configure#automake('w')
-" call neomake#configure#automake('nrwi', 500)
-"let g:neomake_open_list = 2
-
-"=====================================================
 "" Deoplete  Settings 
 "=====================================================
 " Use deoplete.
@@ -219,17 +212,16 @@ endif
 
 let g:ale_linters = {
       \   'python': ['flake8'],
-      \   'ruby': ['standardrb', 'rubocop'],
-      \   'javascript': ['eslint'],
+      \   'javascript': ['eslint']
       \}
 
 
 let g:ale_fixers = {
-      \    'python': ['autopep8'],
+      \     'javascript': ['eslint']
       \}
 
-nmap <C-A-l> :ALEFix<CR>
 let g:ale_fix_on_save = 1
+let g:ale_linters_explicit = 1
 
 
 
@@ -255,7 +247,14 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:vue_pre_processors = ['scss']
 
 
-
+""""""""""""""""""""""""""""""
+" => Black
+""""""""""""""""""""""""""""""
+nnoremap <C-A-l> :Black<CR>
+let g:black_fast=0
+let g:black_linelength=80
+let g:black_skip_string_normalization = 0
+let g:black_virtualenv='~/.vim/black'
 
 """"""""""""""""""""""""""""""
 " => NCM
@@ -264,5 +263,7 @@ let g:vue_pre_processors = ['scss']
 " enable ncm2 for all buffers
 autocmd BufEnter * call ncm2#enable_for_buffer()
 
+
 " IMPORTANT: :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menuone,noselect
+
