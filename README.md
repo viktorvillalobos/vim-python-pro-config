@@ -24,7 +24,7 @@ Install
 2) Clone
 
 ```
-   git clone git@github.com:viktorvillalobos/vim-python-pro-config.git && cd vim-python-pro-config
+   git clone https://github.com/viktorvillalobos/vim-python-pro-config.git && cd vim-python-pro-config
 ```
 
 3) If you use VIM
@@ -47,7 +47,7 @@ Install
 2) Clone
 
 ```
-   git clone git@github.com:viktorvillalobos/vim-python-pro-config.git && cd vim-python-pro-config
+   git clone https://github.com/viktorvillalobos/vim-python-pro-config.git && cd vim-python-pro-config
 ```
 
 3) If you use VIM

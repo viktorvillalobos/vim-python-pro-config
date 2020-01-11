@@ -3,13 +3,6 @@
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
-if has('nvim')
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-Plug 'Shougo/deoplete.nvim'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
-endif
 let g:deoplete#enable_at_startup = 1
 
 Plug 'scrooloose/nerdtree'
@@ -18,13 +11,10 @@ Plug 'tpope/vim-commentary'
 
 Plug 'liuchengxu/vista.vim'
 
-Plug 'jeetsukumaran/vim-pythonsense'
 
 Plug 'jiangmiao/auto-pairs'
 
 Plug 'Vimjas/vim-python-pep8-indent'
-
-Plug 'deoplete-plugins/deoplete-jedi'
 
 Plug 'chriskempson/base16-vim'
 
@@ -42,8 +32,7 @@ Plug 'yuttie/comfortable-motion.vim'      " Smooth scrolling
 
 Plug 'thaerkh/vim-indentguides'           " Visual representation of indents
 
-" Plug 'dense-analysis/ale'               "Me dio problemas de lentitud en
-" archivos grandes
+Plug 'dense-analysis/ale'
 
 Plug 'neomake/neomake'
 
@@ -53,10 +42,22 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'tpope/vim-fugitive'
 
+"---------------------- NCM Completion -------------------------
+
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2-bufword' "General purpose language server
+Plug 'ncm2/ncm2-path'   "General purpose language server
+Plug 'ncm2/ncm2-jedi'   "Python language server
+Plug 'ncm2/ncm2-tern',  {'do': 'npm install'} "Js
+Plug 'ncm2/ncm2-cssomni' "Css Language Server
+
+
 "-------------------=== Python  ===-----------------------------
 
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+Plug 'jeetsukumaran/vim-pythonsense'   
 
 
 call plug#end()
@@ -212,22 +213,23 @@ if filereadable(expand("~/.vimrc_background"))
 endif
 
 
-""----------------------------
-""            ALE
-""            ----------------
-""
-"let g:ale_linters = {
-"      \   'python': ['flake8'],
-"      \   'ruby': ['standardrb', 'rubocop'],
-"      \   'javascript': ['eslint'],
-"      \}
+"----------------------------
+"            ALE
+"----------------------------
+
+let g:ale_linters = {
+      \   'python': ['flake8'],
+      \   'ruby': ['standardrb', 'rubocop'],
+      \   'javascript': ['eslint'],
+      \}
 
 
-"let g:ale_fixers = {
-"      \    'python': ['standardrb'],
-"      \}
-"nmap <C-A-l> :ALEFix<CR>
-"let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+      \    'python': ['autopep8'],
+      \}
+
+nmap <C-A-l> :ALEFix<CR>
+let g:ale_fix_on_save = 1
 
 
 
@@ -252,3 +254,15 @@ let g:ctrlp_cmd = 'CtrlP'
 """"""""""""""""""""""""""""""
 let g:vue_pre_processors = ['scss']
 
+
+
+
+""""""""""""""""""""""""""""""
+" => NCM
+""""""""""""""""""""""""""""""
+
+" enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
+
+" IMPORTANT: :help Ncm2PopupOpen for more information
+set completeopt=noinsert,menuone,noselect
