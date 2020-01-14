@@ -12,7 +12,8 @@ Requirements
 ============
 
 * Vim 7.4+ or NeoVim 0.4+
-* xclip for copy to system clipboard (apt install xclip / pacman -S xclip)
+* Xclip for copy to system clipboard (apt install xclip / pacman -S xclip)
+* Install [The Silver Search](https://github.com/ggreer/the_silver_searcher) (Ack 3-5x more faster)
 
 
 Install

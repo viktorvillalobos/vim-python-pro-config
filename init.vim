@@ -37,6 +37,8 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'tpope/vim-fugitive'
 
+Plug 'mileszs/ack.vim' "Ack finder
+
 "---------------------- NCM Completion -------------------------
 
 Plug 'ncm2/ncm2'
@@ -279,4 +281,13 @@ autocmd BufEnter * call ncm2#enable_for_buffer()
 
 " IMPORTANT: :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menuone,noselect
+
+
+
+
+""""""""""""""""""""""""""""""
+" => ACK
+""""""""""""""""""""""""""""""
+
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
