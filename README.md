@@ -12,6 +12,7 @@ Requirements
 ============
 
 * Vim 7.4+ or NeoVim 0.4+
+* xclip for copy to system clipboard (apt install xclip / pacman -S xclip)
 
 
 Install
@@ -39,6 +40,13 @@ Install
    :PlugInstall
 ```
 
+5) Create your venvs for neovim and replace this lines with your paths
+```
+    let g:python_host_prog = '/home/viktor/.envs/neovim2/bin/python'
+    let g:python3_host_prog = '/home/viktor/.envs/neovim3/bin/python'
+```
+
+
 # NeoVim
 
 
@@ -62,6 +70,23 @@ Install
    :PlugInstall
 ```
 
+5) Create your venvs for neovim and replace this lines with your paths
+
+## Replace this lines with your envs 
+```
+    let g:python_host_prog = '/home/viktor/.envs/neovim2/bin/python'
+    let g:python3_host_prog = '/home/viktor/.envs/neovim3/bin/python'
+```
+
+## Install dependencies in both ENVS
+
+```
+     source venv/bin/activate
+     pip install neovim 
+     pip install jedi
+```
+
+ 
 
 DevIcons (Optional)
 ====================
@@ -96,6 +121,34 @@ KeyMaps
 ```
     nmap <F9> :bprev<CR>
     nmap <F10> :bnext<CR>
+```
+
+## MRU (Recent Open Documents)
+
+```
+    nmap <C-e> (Control + E)
+```
+
+## Find Files CtrlP Plugin
+```
+    nmap <C-p> (Control + P)
+```
+
+
+Troubleshooting
+===============
+
+## ClipBoard Error
+
+Remember install xclip
+
+## Common Solutions
+
+
+Execute CheckHealt inside NEO VIM
+
+```
+   :CheckHealt
 ```
 
 

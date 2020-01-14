@@ -90,7 +90,7 @@ set noswapfile 	                            " no swap files
 
 set backspace=indent,eol,start              " backspace removes all (indents, EOLs, start) What is start?
 set scrolloff=20                            " let 10 lines before/after cursor during scroll
-set clipboard=unnamed                       " use system clipboard
+set clipboard+=unnamedplus
 set exrc                                    " enable usage of additional .vimrc files from working directory
 set secure                                  " prohibit .vimrc files to execute shell, create files, etc...
 
@@ -199,8 +199,8 @@ let g:DevIconsEnableFolderExtensionPatternMatching = 0
 let g:deoplete#enable_at_startup = 1
 
 " Envs for neovim in case you need
-" let g:python_host_prog = '/home/viktor/.envs/neovim2/bin/python'
-" let g:python3_host_prog = '/home/viktor/.envs/neovim3/bin/python'
+let g:python_host_prog = '/home/viktor/.envs/neovim2/bin/python'
+let g:python3_host_prog = '/home/viktor/.envs/neovim3/bin/python'
 
 
 " ------ BASE 16 -----------------
