@@ -64,6 +64,8 @@ Plug 'jeetsukumaran/vim-pythonsense'
 Plug 'mattn/emmet-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'alvan/vim-closetag'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'cakebaker/scss-syntax.vim'
 
 call plug#end()
 
@@ -224,7 +226,7 @@ let g:ale_fixers = {
       \     'javascript': ['eslint']
       \}
 
-let g:ale_fix_on_save = 1
+"let g:ale_fix_on_save = 1
 let g:ale_linters_explicit = 1
 nmap <C-A-S-l> :ALEFix<CR>
 
@@ -267,6 +269,8 @@ let g:black_virtualenv='~/.vim/black'
 " => VIM JS
 """"""""""""""""""""""""""""""
 let g:javascript_plugin_jsdoc = 1
+
+autocmd FileType javascript setlocal ts=2 sts=2 sw=2
 
 """"""""""""""""""""""""""""""
 " => NCM
