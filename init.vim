@@ -37,6 +37,8 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'tpope/vim-fugitive'
 
+Plug 'mileszs/ack.vim' "Ack finder
+
 "---------------------- NCM Completion -------------------------
 
 Plug 'ncm2/ncm2'
@@ -92,7 +94,7 @@ set noswapfile 	                            " no swap files
 
 set backspace=indent,eol,start              " backspace removes all (indents, EOLs, start) What is start?
 set scrolloff=20                            " let 10 lines before/after cursor during scroll
-set clipboard=unnamed                       " use system clipboard
+set clipboard+=unnamedplus
 set exrc                                    " enable usage of additional .vimrc files from working directory
 set secure                                  " prohibit .vimrc files to execute shell, create files, etc...
 
@@ -120,6 +122,7 @@ let NERDTreeIgnore=['\.pyc$', '\.pyo$', '__pycache__$']     " Ignore files in NE
 let NERDTreeWinSize=40
 "autocmd VimEnter * if !argc() | NERDTree | endif  " Load NERDTree only if vim is run without arguments
 nmap " :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
 
 
 "=====================================================
@@ -201,8 +204,8 @@ let g:DevIconsEnableFolderExtensionPatternMatching = 0
 let g:deoplete#enable_at_startup = 1
 
 " Envs for neovim in case you need
-" let g:python_host_prog = '/home/viktor/.envs/neovim2/bin/python'
-" let g:python3_host_prog = '/home/viktor/.envs/neovim3/bin/python'
+let g:python_host_prog = '/home/viktor/.envs/neovim2/bin/python'
+let g:python3_host_prog = '/home/viktor/.envs/neovim3/bin/python'
 
 
 " ------ BASE 16 -----------------
@@ -282,4 +285,13 @@ autocmd BufEnter * call ncm2#enable_for_buffer()
 
 " IMPORTANT: :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menuone,noselect
+
+
+
+
+""""""""""""""""""""""""""""""
+" => ACK
+""""""""""""""""""""""""""""""
+
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
