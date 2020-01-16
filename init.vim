@@ -217,8 +217,9 @@ endif
 "            ALE
 "----------------------------
 
+
 let g:ale_linters = {
-      \   'python': ['flake8'],
+      \   'python': ['flake8', 'mypy'],
       \   'javascript': ['eslint']
       \}
 
@@ -226,6 +227,19 @@ let g:ale_linters = {
 let g:ale_fixers = {
       \     'javascript': ['eslint']
       \}
+
+" This set the flake executables to not search in the system
+let g:ale_virtualenv_dir_names = []
+let b:ale_python_flake8_executable = '/home/viktor/.envs/neovim3/bin/python'
+let b:ale_python_flake8_use_global = 1
+
+let b:ale_python_mypy_executable = '/home/viktor/.envs/neovim3/bin/python'
+let b:ale_python_mypy_use_global = 1
+
+
+" Cache failed executable() checks.
+let g:ale_cache_executable_check_failures = 1
+
 
 let g:ale_fix_on_save = 1
 let g:ale_linters_explicit = 1
@@ -262,7 +276,7 @@ let g:vue_pre_processors = ['scss']
 nnoremap <C-A-l> :Black<CR>
 let g:black_fast=0
 let g:black_linelength=80
-let g:black_skip_string_normalization = 0
+let g:black_skip_string_normalization = 1
 let g:black_virtualenv='~/.vim/black'
 
 
