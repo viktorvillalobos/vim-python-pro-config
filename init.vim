@@ -21,7 +21,11 @@ Plug 'ryanoasis/vim-devicons'
 
 Plug 'thaerkh/vim-indentguides'           " Visual representation of indents
 
-Plug 'leafoftree/vim-vue-plugin'
+Plug 'posva/vim-vue'
+
+Plug 'digitaltoad/vim-pug'
+
+Plug 'ap/vim-css-color'
 
 Plug 'vim-airline/vim-airline'            " Lean & mean status/tabline for vim
 
@@ -222,12 +226,14 @@ endif
 
 let g:ale_linters = {
       \   'python': ['flake8', 'mypy'],
-      \   'javascript': ['eslint']
+      \   'javascript': ['eslint'],
+      \   'vue': ['eslint']
       \}
 
 
 let g:ale_fixers = {
-      \     'javascript': ['eslint']
+      \     'javascript': ['eslint'],
+      \     'vue': ['eslint']
       \}
 
 " This set the flake executables to not search in the system
@@ -277,8 +283,8 @@ let g:vue_pre_processors = ['scss']
 """"""""""""""""""""""""""""""
 nnoremap <C-A-l> :Black<CR>
 let g:black_fast=0
-let g:black_linelength=80
-let g:black_skip_string_normalization = 1
+let g:black_linelength=79
+let g:black_skip_string_normalization = 0
 let g:black_virtualenv='~/.vim/black'
 
 
@@ -288,6 +294,7 @@ let g:black_virtualenv='~/.vim/black'
 let g:javascript_plugin_jsdoc = 1
 
 autocmd FileType javascript setlocal ts=2 sts=2 sw=2
+autocmd FileType vue setlocal ts=2 sts=2 sw=2
 
 """"""""""""""""""""""""""""""
 " => NCM
@@ -307,5 +314,35 @@ set completeopt=noinsert,menuone,noselect
 " => ACK
 """"""""""""""""""""""""""""""
 
-let g:ackprg = 'ag --nogroup --nocolor --column'
+if executable('ag')
+    let g:ackprg = 'ag --nogroup --nocolor --column'
+endif
 
+
+""""""""""""""""""""""""""""""
+" => Vim-Vue
+""""""""""""""""""""""""""""""
+
+
+let g:vue_pre_processors = ['pug', 'sass']
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+let g:vim_vue_plugin_load_full_syntax = 1
+let g:vim_vue_plugin_debug = 1
+
+
+
+let g:user_emmet_leader_key='<C-z>'
+
+let s:emmet_settings = {
+            \'vue': {
+            \'extends': 'html',
+            \},
+            \}
+
+
+
+""""""""""""""""""""""""""""
+" YAML
+""""""""""""""""""""""""""""
+
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
