@@ -251,7 +251,7 @@ let g:ale_cache_executable_check_failures = 1
 let g:ale_fix_on_save = 0
 
 let g:ale_linters_explicit = 1
-nmap <C-A-S-l> :ALEFix<CR>
+nmap <C-S-l> :ALEFix<CR>
 
 """"""""""""""""""""""""""""""
 " => GO TO DEFINITION
