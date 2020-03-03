@@ -221,7 +221,7 @@ endif
 
 
 let g:ale_linters = {
-      \   'python': ['flake8', 'mypy'],
+      \   'python': ['flake8'],
       \   'javascript': ['eslint']
       \}
 
@@ -277,7 +277,7 @@ let g:vue_pre_processors = ['scss']
 """"""""""""""""""""""""""""""
 nnoremap <C-A-l> :Black<CR>
 let g:black_fast=0
-let g:black_linelength=80
+let g:black_linelength=79
 let g:black_skip_string_normalization = 1
 let g:black_virtualenv='~/.vim/black'
 
