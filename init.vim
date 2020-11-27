@@ -5,6 +5,8 @@ call plug#begin('~/.vim/plugged')
 
 let g:deoplete#enable_at_startup = 1
 
+Plug 'neomake/neomake'
+
 Plug 'scrooloose/nerdtree'
 
 Plug 'tpope/vim-commentary'
@@ -45,19 +47,22 @@ Plug 'mileszs/ack.vim' "Ack finder
 
 "---------------------- NCM Completion -------------------------
 
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-bufword' "General purpose language server
-Plug 'ncm2/ncm2-path'   "General purpose language server
-Plug 'ncm2/ncm2-jedi'   "Python language server
-Plug 'ncm2/ncm2-tern',  {'do': 'npm install'} "Js
-Plug 'ncm2/ncm2-cssomni' "Css Language Server
+"Plug 'ncm2/ncm2'
+"Plug 'roxma/nvim-yarp'
+"Plug 'ncm2/ncm2-bufword' "General purpose language server
+"Plug 'ncm2/ncm2-path'   "General purpose language server
+"Plug 'ncm2/ncm2-jedi'   "Python language server
+"Plug 'ncm2/ncm2-tern',  {'do': 'npm install'} "Js
+"Plug 'ncm2/ncm2-cssomni' "Css Language Server
 
 
+"---------------------TabNine----------------------------------
+Plug 'zxqfl/tabnine-vim'
 "---------------------Linting----------------------------------
 "
 Plug 'dense-analysis/ale'
 Plug 'psf/black'
+Plug 'fisadev/vim-isort'
 
 "-------------------=== Python  ===-----------------------------
 
@@ -143,6 +148,8 @@ function! NearestMethodOrFunction() abort
   return get(b:, 'vista_nearest_method_or_function', '')
 endfunction
 
+set statusline=%<%f\ %h%m%r%{kite#statusline()}%=%-14.(%l,%c%V%)\ %P
+set laststatus=2  " always display the status line
 set statusline+=%{NearestMethodOrFunction()}
 
 " By default vista.vim never run if you don't call it explicitly.
@@ -209,8 +216,8 @@ let g:DevIconsEnableFolderExtensionPatternMatching = 0
 let g:deoplete#enable_at_startup = 1
 
 " Envs for neovim in case you need
-let g:python_host_prog = '/home/viktor/.envs/neovim2/bin/python'
-let g:python3_host_prog = '/home/viktor/.envs/neovim3/bin/python'
+"let g:python_host_prog = '/usr/bin/python2'
+"let g:python3_host_prog = '/usr/local/bin/python3'
 
 
 " ------ BASE 16 -----------------
@@ -226,7 +233,7 @@ endif
 
 
 let g:ale_linters = {
-      \   'python': ['flake8'],
+      \   'python': ['flake8', 'mypy'],
       \   'javascript': ['eslint'],
       \   'vue': ['eslint']
       \}
@@ -239,10 +246,10 @@ let g:ale_fixers = {
 
 " This set the flake executables to not search in the system
 let g:ale_virtualenv_dir_names = []
-let b:ale_python_flake8_executable = '/home/viktor/.envs/neovim3/bin/python'
+"let b:ale_python_flake8_executable = '/home/viktor/.envs/neovim3/bin/python'
 let b:ale_python_flake8_use_global = 1
 
-let b:ale_python_mypy_executable = '/home/viktor/.envs/neovim3/bin/python'
+"let b:ale_python_mypy_executable = '/home/viktor/.envs/neovim3/bin/python'
 let b:ale_python_mypy_use_global = 1
 
 
@@ -280,12 +287,17 @@ let g:vue_pre_processors = ['scss']
 
 
 """"""""""""""""""""""""""""""
-" => Black
+" => Isort
 """"""""""""""""""""""""""""""
+
+let g:vim_isort_map = '<c-i>'
+
+""""""""""""""""""""""""""""""
+" => Black
 nnoremap <C-A-l> :Black<CR>
-let g:black_fast=0
-let g:black_linelength=79
-let g:black_skip_string_normalization = 1
+" let g:black_fast=0
+ let g:black_linelength=88
+" let g:black_skip_string_normalization = 1
 let g:black_virtualenv='~/.vim/black'
 
 
@@ -302,7 +314,7 @@ autocmd FileType vue setlocal ts=2 sts=2 sw=2
 """"""""""""""""""""""""""""""
 
 " enable ncm2 for all buffers
-autocmd BufEnter * call ncm2#enable_for_buffer()
+"autocmd BufEnter * call ncm2#enable_for_buffer()
 
 
 " IMPORTANT: :help Ncm2PopupOpen for more information
@@ -347,3 +359,18 @@ let s:emmet_settings = {
 """"""""""""""""""""""""""""
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+
+
+" When writing a buffer (no delay).
+call neomake#configure#automake('w')
+" When writing a buffer (no delay), and on normal mode changes (after 750ms).
+call neomake#configure#automake('nw', 750)
+" When reading a buffer (after 1s), and when writing (no delay).
+call neomake#configure#automake('rw', 1000)
+" Full config: when writing or reading a buffer, and on changes in insert and
+" normal mode (after 500ms; no delay when writing).
+call neomake#configure#automake('nrwi', 500)
+
+let g:neomake_python_mypy_exe = 'python'
+let g:neomake_python_mypy_args = ['-m', 'mypy'] + neomake#makers#ft#python#mypy().args
