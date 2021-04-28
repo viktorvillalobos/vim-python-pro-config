@@ -1,9 +1,6 @@
-" Specify a directory for plugins
-" - For Neovim: stdpath('data') . '/plugged'
-" - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
-let g:deoplete#enable_at_startup = 1
+"Plug 'neomake/neomake'
 
 Plug 'scrooloose/nerdtree'
 
@@ -13,8 +10,6 @@ Plug 'liuchengxu/vista.vim'
 
 Plug 'jiangmiao/auto-pairs'
 
-Plug 'Vimjas/vim-python-pep8-indent'
-
 Plug 'chriskempson/base16-vim'
 
 Plug 'ryanoasis/vim-devicons'
@@ -22,8 +17,6 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'thaerkh/vim-indentguides'           " Visual representation of indents
 
 Plug 'posva/vim-vue'
-
-Plug 'digitaltoad/vim-pug'
 
 Plug 'ap/vim-css-color'
 
@@ -43,25 +36,16 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'mileszs/ack.vim' "Ack finder
 
-"---------------------- NCM Completion -------------------------
-
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-bufword' "General purpose language server
-Plug 'ncm2/ncm2-path'   "General purpose language server
-Plug 'ncm2/ncm2-jedi'   "Python language server
-Plug 'ncm2/ncm2-tern',  {'do': 'npm install'} "Js
-Plug 'ncm2/ncm2-cssomni' "Css Language Server
-
-
 "---------------------Linting----------------------------------
 "
-Plug 'dense-analysis/ale'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'dense-analysis/ale'
 Plug 'psf/black'
+Plug 'fisadev/vim-isort'
+Plug 'Vimjas/vim-python-pep8-indent'
 
 "-------------------=== Python  ===-----------------------------
 
-Plug 'jmcantrell/vim-virtualenv'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'jeetsukumaran/vim-pythonsense'   
 
@@ -72,6 +56,12 @@ Plug 'pangloss/vim-javascript'
 Plug 'alvan/vim-closetag'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'cakebaker/scss-syntax.vim'
+
+
+" Using vim-plug
+Plug 'elixir-editors/vim-elixir'
+" Plug 'slashmili/alchemist.vim'
+
 
 call plug#end()
 
@@ -126,7 +116,7 @@ let NERDTreeIgnore=['\.pyc$', '\.pyo$', '__pycache__$']     " Ignore files in NE
 let NERDTreeWinSize=40
 "autocmd VimEnter * if !argc() | NERDTree | endif  " Load NERDTree only if vim is run without arguments
 nmap " :NERDTreeToggle<CR>
-nmap @ :NERDTreeToggle<CR>
+" nmap @ :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 
 
@@ -143,6 +133,8 @@ function! NearestMethodOrFunction() abort
   return get(b:, 'vista_nearest_method_or_function', '')
 endfunction
 
+set statusline=%<%f\ %h%m%r%{kite#statusline()}%=%-14.(%l,%c%V%)\ %P
+set laststatus=2  " always display the status line
 set statusline+=%{NearestMethodOrFunction()}
 
 " By default vista.vim never run if you don't call it explicitly.
@@ -184,11 +176,11 @@ let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
 let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1 
 
 " change the default character when no match found
-let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = 'ƛ'
+let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = '‚àÜ√µ'
 
 " set a byte character marker (BOM) utf-8 symbol when retrieving file encoding
 " disabled by default with no value
-let g:WebDevIconsUnicodeByteOrderMarkerDefaultSymbol = ''
+let g:WebDevIconsUnicodeByteOrderMarkerDefaultSymbol = '√ì√§√°'
 
 " enable folder/directory glyph flag (disabled by default with 0)
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
@@ -202,15 +194,9 @@ let g:DevIconsEnableFolderPatternMatching = 1
 " enable file extension pattern matching glyphs on folder/directory (disabled by default with 0)
 let g:DevIconsEnableFolderExtensionPatternMatching = 0
 
-"=====================================================
-"" Deoplete  Settings 
-"=====================================================
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
-
 " Envs for neovim in case you need
-let g:python_host_prog = '/home/viktor/.envs/neovim2/bin/python'
-let g:python3_host_prog = '/home/viktor/.envs/neovim3/bin/python'
+let g:python_host_prog = '/Users/viktor/.envs/venv2/bin/python'
+let g:python3_host_prog = '/Users/viktor/.envs/venv/bin/python'
 
 
 " ------ BASE 16 -----------------
@@ -226,7 +212,7 @@ endif
 
 
 let g:ale_linters = {
-      \   'python': ['flake8'],
+      \   'python': ['flake8', 'mypy'],
       \   'javascript': ['eslint'],
       \   'vue': ['eslint']
       \}
@@ -239,10 +225,10 @@ let g:ale_fixers = {
 
 " This set the flake executables to not search in the system
 let g:ale_virtualenv_dir_names = []
-let b:ale_python_flake8_executable = '/home/viktor/.envs/neovim3/bin/python'
+"let b:ale_python_flake8_executable = '/home/viktor/.envs/neovim3/bin/python'
 let b:ale_python_flake8_use_global = 1
 
-let b:ale_python_mypy_executable = '/home/viktor/.envs/neovim3/bin/python'
+"let b:ale_python_mypy_executable = '/home/viktor/.envs/neovim3/bin/python'
 let b:ale_python_mypy_use_global = 1
 
 
@@ -280,12 +266,17 @@ let g:vue_pre_processors = ['scss']
 
 
 """"""""""""""""""""""""""""""
-" => Black
+" => Isort
 """"""""""""""""""""""""""""""
+
+let g:vim_isort_map = '<c-i>'
+
+""""""""""""""""""""""""""""""
+" => Black
 nnoremap <C-A-l> :Black<CR>
-let g:black_fast=0
-let g:black_linelength=79
-let g:black_skip_string_normalization = 1
+" let g:black_fast=0
+let g:black_linelength=88
+" let g:black_skip_string_normalization = 1
 let g:black_virtualenv='~/.vim/black'
 
 
@@ -296,20 +287,7 @@ let g:javascript_plugin_jsdoc = 1
 
 autocmd FileType javascript setlocal ts=2 sts=2 sw=2
 autocmd FileType vue setlocal ts=2 sts=2 sw=2
-
-""""""""""""""""""""""""""""""
-" => NCM
-""""""""""""""""""""""""""""""
-
-" enable ncm2 for all buffers
-autocmd BufEnter * call ncm2#enable_for_buffer()
-
-
-" IMPORTANT: :help Ncm2PopupOpen for more information
-set completeopt=noinsert,menuone,noselect
-
-
-
+autocmd FileType elixir setlocal ts=2 sts=2 sw=2
 
 """"""""""""""""""""""""""""""
 " => ACK
@@ -332,7 +310,7 @@ let g:vim_vue_plugin_debug = 1
 
 
 
-let g:user_emmet_leader_key='<C-z>'
+" let g:user_emmet_leader_key='<C-z>'
 
 let s:emmet_settings = {
             \'vue': {
@@ -347,3 +325,7 @@ let s:emmet_settings = {
 """"""""""""""""""""""""""""
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
